@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -47,9 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => AddVideoGameScreen(
-
-            ),
+            builder: (_) => AddVideoGameScreen(),
           ),
         ),
       ),
@@ -61,7 +60,6 @@ class _HomeScreenState extends State<HomeScreen> {
         itemBuilder: (BuildContext context, int index) {
           return Card(
             child: Container(
-              height: 120.0,
               width: 200.0,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -73,6 +71,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    Image.network(
+                      'http://localhost:5000/api/videogame/photo/${data[index]["_id"]}',
+                    ),
                     Text(
                       data[index]["name"],
                       style: TextStyle(
